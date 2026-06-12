@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NeonButton } from './NeonButton';
 
-export const RulesScreen = ({ rules, onComplete }) => {
+export const RulesScreen = ({ rules = [], onComplete }) => {
   const [visibleCount, setVisibleCount] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
 
