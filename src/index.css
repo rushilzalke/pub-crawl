@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-y2k: "Press Start 2P", cursive;
+  --font-body: "Inter", sans-serif;
+  --color-neon-pink: #ff006e;
+  --color-neonPink: #ff006e;
+  --color-neon-blue: #3a86ff;
+  --color-neonBlue: #3a86ff;
+  --color-neon-green: #06d6a0;
+  --color-neonGreen: #06d6a0;
+  --color-neon-yellow: #ffbe0b;
+  --color-neonYellow: #ffbe0b;
+  --color-dark-bg: #050510;
+  --color-darkBg: #050510;
+  --shadow-neon-pink: 0 0 8px #ff006e;
+  --shadow-neon-blue: 0 0 8px #3a86ff;
+  --shadow-neon-green: 0 0 8px #06d6a0;
+  --shadow-neon-yellow: 0 0 8px #ffbe0b;
+}
+
+@utility shadow-neon-pink {
+  box-shadow: 0 0 8px #ff006e;
+}
+@utility shadow-neon-blue {
+  box-shadow: 0 0 8px #3a86ff;
+}
+@utility shadow-neon-green {
+  box-shadow: 0 0 8px #06d6a0;
+}
+@utility shadow-neon-yellow {
+  box-shadow: 0 0 8px #ffbe0b;
+}
+
+body {
+  background-color: #050510;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 50;
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff006e;
+  clip-path: inset(45% 0 30% 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #06d6a0;
+  clip-path: inset(10% 0 60% 0);
+  animation: glitch-anim2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip-path: inset(20% 0 80% 0); }
+  20% { clip-path: inset(60% 0 10% 0); }
+  40% { clip-path: inset(40% 0 50% 0); }
+  60% { clip-path: inset(80% 0 5% 0); }
+  80% { clip-path: inset(10% 0 70% 0); }
+  100% { clip-path: inset(30% 0 20% 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip-path: inset(10% 0 60% 0); }
+  20% { clip-path: inset(30% 0 20% 0); }
+  40% { clip-path: inset(70% 0 10% 0); }
+  60% { clip-path: inset(20% 0 50% 0); }
+  80% { clip-path: inset(50% 0 30% 0); }
+  100% { clip-path: inset(5% 0 80% 0); }
+}
+
+.fire-text {
+  background-image: linear-gradient(to bottom, #ffbe0b, #ff006e, #3a86ff);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: flicker 1s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; text-shadow: 0 0 10px #ffbe0b; }
+  100% { opacity: 1; text-shadow: 0 0 20px #ff006e; }
+}
