@@ -3,15 +3,17 @@ import { StarCursor } from './StarCursor';
 
 export const Y2KContainer = ({ children, hideMarquee = false }) => {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-darkBg text-white">
+    <div className="min-h-screen relative overflow-hidden bg-darkBg text-white selection:bg-neonPink selection:text-white">
       <div className="crt-overlay pointer-events-none z-50"></div>
+      <div className="crt-scanline pointer-events-none z-51"></div>
+      <div className="crt-vignette pointer-events-none z-52"></div>
       <StarCursor />
       
       {!hideMarquee && (
-        <div className="w-full overflow-hidden bg-neonPink text-darkBg py-1 font-y2k text-xs border-b-2 border-neonPink shadow-neon-pink z-40 relative">
+        <div className="w-full overflow-hidden bg-neonPink text-darkBg py-1 font-y2k text-[10px] md:text-xs border-b-2 border-darkBg shadow-[0_4px_0_#000] z-40 relative">
           <div className="whitespace-nowrap animate-[marquee_20s_linear_infinite] inline-block">
-            🔥 WARNING: MAXIMUM HYPE DETECTED 🔥 NO FLAKING ALLOWED 🔥 DRINK RESPONSIBLY OR DON'T 🔥 
-            🔥 WARNING: MAXIMUM HYPE DETECTED 🔥 NO FLAKING ALLOWED 🔥 DRINK RESPONSIBLY OR DON'T 🔥
+            🔥 WARNING: MAXIMUM HYPE DETECTED 🔥 NO FLAKING ALLOWED 🔥 DRINK RESPONSIBLY OR DON'T 🔥 👁️ VIBE CHECK IN PROGRESS 👁️
+            🔥 WARNING: MAXIMUM HYPE DETECTED 🔥 NO FLAKING ALLOWED 🔥 DRINK RESPONSIBLY OR DON'T 🔥 👁️ VIBE CHECK IN PROGRESS 👁️
           </div>
         </div>
       )}

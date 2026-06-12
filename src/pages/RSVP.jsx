@@ -12,11 +12,9 @@ export const RSVP = () => {
   const [name, setName] = useState('');
   const { position, scale, text, handleHover, strikes } = useTrollButton();
   
-  // Actually we need global RSVPs, but for this demo local storage is fine.
-  // In a real app, this would post to a backend.
   const handleAccept = () => {
     if (!name.trim()) {
-      alert("ENTER YOUR NAME COWARD");
+      alert("drop the name bestie 😭");
       return;
     }
     const rsvpsKey = `rsvps_${crawlId}`;
@@ -32,46 +30,63 @@ export const RSVP = () => {
 
   return (
     <Y2KContainer>
-      <div className="flex flex-col items-center justify-center flex-1 h-full relative">
+      <div className="flex flex-col items-center justify-center flex-1 h-full relative p-4">
         <motion.div 
-          className="w-full max-w-sm bg-darkBg border-[3px] border-neonGreen p-8 shadow-[10px_10px_0px_#06d6a0] relative z-10"
+          className="w-full max-w-sm bg-darkBg border-[3px] border-neonGreen p-8 shadow-[10px_10px_0px_#06d6a0] relative z-20"
           initial={false}
           animate={{
-            x: strikes >= 2 ? (Math.random() - 0.5) * 50 : 0,
-            y: strikes >= 2 ? (Math.random() - 0.5) * 50 : 0,
+            x: strikes >= 3 ? (Math.random() - 0.5) * 40 : 0,
+            y: strikes >= 3 ? (Math.random() - 0.5) * 40 : 0,
+            rotate: strikes >= 3 ? (Math.random() - 0.5) * 5 : 0,
           }}
-          transition={{ type: 'spring', stiffness: 300, damping: 10 }}
+          style={{
+            position: strikes >= 3 ? 'absolute' : 'relative',
+            left: strikes >= 3 ? `${50 + (position.x / 10)}%` : 'auto',
+            top: strikes >= 3 ? `${50 + (position.y / 10)}%` : 'auto',
+            transform: strikes >= 3 ? 'translate(-50%, -50%)' : 'none',
+          }}
+          transition={{ type: 'spring', stiffness: 400, damping: 15 }}
         >
-          <h2 className="font-y2k text-neonGreen text-xl text-center mb-6">RSVP STATUS</h2>
+          <div className="absolute top-0 left-0 w-full bg-neonGreen text-darkBg font-y2k text-[8px] p-1 flex justify-between border-b-[3px] border-darkBg">
+            <span>RSVP_FINAL.EXE</span>
+            <span>[ ? ]</span>
+          </div>
+
+          <h2 className="font-y2k text-neonGreen text-lg text-center mb-10 mt-4 tracking-tighter">ARE YOU BUILT FOR THIS? 👀</h2>
           
-          <div className="space-y-6">
-            <div>
-              <label className="block text-white font-y2k text-xs mb-2">YOUR NAME</label>
+          <div className="space-y-8">
+            <div className="group">
+              <label className="block text-white/60 font-y2k text-[10px] mb-3 group-focus-within:text-neonPink transition-colors">WHAT DO UR FRIENDS CALL U? 👑</label>
               <input
                 type="text"
                 value={name}
                 onChange={e => setName(e.target.value)}
-                className="w-full bg-transparent border-2 border-white p-3 text-white outline-none focus:border-neonPink focus:shadow-neon-pink text-center font-bold text-lg"
-                placeholder="WHO DIS?"
+                className="w-full bg-black border-2 border-white p-4 text-white outline-none focus:border-neonPink focus:shadow-neon-pink text-center font-bold text-xl transition-all"
+                placeholder="your name, your legacy 👑"
               />
             </div>
 
-            <div className="pt-4 flex flex-col gap-4 relative h-32">
-              <NeonButton color="green" className="w-full py-4 text-xl" onClick={handleAccept}>
-                I'M IN 🔥
+            <div className="pt-2 flex flex-col gap-6 relative min-h-[140px]">
+              <NeonButton color="green" className="w-full py-5 text-2xl shadow-[6px_6px_0px_#000]" onClick={handleAccept}>
+                I'M SO IN 🔥
               </NeonButton>
               
               <div 
-                className="absolute w-full bottom-0 flex justify-center items-center"
+                className="absolute w-full flex justify-center items-center pointer-events-none"
                 style={{ 
+                  bottom: strikes >= 3 ? 'auto' : '-40px',
                   transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-                  transition: 'transform 0.2s ease-out'
+                  transition: 'transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  zIndex: 30
                 }}
               >
                 <button
                   onMouseEnter={handleHover}
-                  onClick={handleHover} // For mobile taps
-                  className="font-y2k text-[10px] text-white/50 border border-white/20 px-4 py-2 hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors whitespace-nowrap"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleHover();
+                  }}
+                  className="pointer-events-auto font-y2k text-[9px] text-white/40 border-2 border-white/10 px-6 py-3 hover:bg-red-500 hover:text-white hover:border-red-500 transition-all whitespace-nowrap bg-darkBg/80 backdrop-blur-sm shadow-xl cursor-not-allowed"
                 >
                   {text}
                 </button>
@@ -79,6 +94,10 @@ export const RSVP = () => {
             </div>
           </div>
         </motion.div>
+
+        {strikes >= 3 && (
+          <div className="fixed inset-0 bg-red-500/10 pointer-events-none animate-pulse z-0"></div>
+        )}
       </div>
     </Y2KContainer>
   );
