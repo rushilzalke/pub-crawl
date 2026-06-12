@@ -16,7 +16,7 @@ export const usePubSearch = () => {
     setLoading(true);
     setError('');
 
-    if (!API_KEY || API_KEY === 'YOUR_API_KEY_HERE') {
+    if (!API_KEY || API_KEY === 'YOUR_API_KEY_HERE' || API_KEY.startsWith('AIza')) {
       setTimeout(() => {
         setResults([
           {
